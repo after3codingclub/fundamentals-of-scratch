@@ -20,4 +20,5 @@
 <li>while loop</li>
 <li>if/then loop</li>
 <li>decrementing variables</li>
-<li>hide/show sprites</li></ul>
+<li>hide/show sprites</li>
+<li>clones</li></ul>
