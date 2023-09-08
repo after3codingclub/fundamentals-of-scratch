@@ -10,7 +10,7 @@
 <li>how can we add fun chaos to this game? controls? goals?</li>
 <li>can we change the assets of this game to make it something unique?</li></ul>
 <h3>software engineering concepts</h3>
-<ul><li>variables</li>
+<ul><li>decrementing variables</li>
 <li>UI/UX</li>
 <li>game loops</li>
 <li>separation of concerns</li></ul>
