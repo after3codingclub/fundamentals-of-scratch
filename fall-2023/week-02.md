@@ -8,7 +8,8 @@
 <h3>challenges</h3>
 <ul><li>create your own version of this game</li>
 <li>how can we add fun chaos to this game? controls? goals?</li>
-<li>can we change the assets of this game to make it something unique?</li></ul>
+<li>can we change the assets of this game to make it something unique?</li>
+<li>what sprites can we add</li></ul>
 <h3>game design concepts</h3>
 <ul><li>making a shop</li>
 <li>game states</li>
