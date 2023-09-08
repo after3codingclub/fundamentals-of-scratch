@@ -9,7 +9,11 @@
 <ul><li>create your own version of this game</li>
 <li>how can we add fun chaos to this game? controls? goals?</li>
 <li>can we change the assets of this game to make it something unique?</li></ul>
-<h3>concepts</h3>
+<h3>software engineering concepts</h3>
 <ul><li>variables</li>
 <li>UI/UX</li>
-<li>resource management</li></ul>
+<li>game loops</li></ul>
+<h3>scratch concepts</h3>
+<ul><li>messaging</li>
+<li>while loop</li>
+<li>if/then loop</li></ul>
