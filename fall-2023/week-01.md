@@ -12,6 +12,7 @@
 <h3>software engineering concepts</h3>
 <ul>
   <li>number data types</li>
+  <li>boolean data types</li>
 <li>UI/UX</li>
 <li>game loops</li>
 <li>separation of concerns</li></ul>
