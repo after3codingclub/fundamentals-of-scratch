@@ -12,4 +12,4 @@
 <h3>game design concepts</h3>
 <ul><li>making a shop</li>
 <li>game states</li>
-<li>purchasing</li></ul>
+<li>purchasing sprites</li></ul>
