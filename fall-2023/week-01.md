@@ -1,5 +1,5 @@
 <h1>clicker</h1>
-<p>create a clicker game based on the following scratch game: [link]</p>
+<p>create a clicker game based on the following scratch game: [[link](https://scratch.mit.edu/projects/890846241/)]</p>
 <h3>questions</h3>
 <ul><li>what are the rules of this game?</li>
 <li>how do we win this game?</li>
