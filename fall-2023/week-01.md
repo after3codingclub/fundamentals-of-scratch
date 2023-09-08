@@ -11,11 +11,13 @@
 <li>can we change the assets of this game to make it something unique?</li></ul>
 <h3>software engineering concepts</h3>
 <ul>
-  <li>number data types</li><li>decrementing variables</li>
+  <li>number data types</li>
 <li>UI/UX</li>
 <li>game loops</li>
 <li>separation of concerns</li></ul>
 <h3>scratch concepts</h3>
 <ul><li>messaging</li>
 <li>while loop</li>
-<li>if/then loop</li></ul>
+<li>if/then loop</li>
+<li>decrementing variables</li>
+<li>hide/show sprites</li></ul>
