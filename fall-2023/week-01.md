@@ -12,7 +12,8 @@
 <h3>software engineering concepts</h3>
 <ul><li>variables</li>
 <li>UI/UX</li>
-<li>game loops</li></ul>
+<li>game loops</li>
+<li>separation of concerns</li></ul>
 <h3>scratch concepts</h3>
 <ul><li>messaging</li>
 <li>while loop</li>
