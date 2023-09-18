@@ -5,12 +5,6 @@
 <li>how do we win this game?</li>
 <li>what are the materials and mechanics of this game?</li>
 <li>what space does this game exist?</li></ul>
-<h3>challenges</h3>
-<ul><li>create your own version of this game</li>
-<li>how can we add fun chaos to this game? controls? goals?</li>
-<li>can we change the assets of this game to make it something unique?</li></ul>
-<h3>software engineering concepts</h3>
-<ul>
   <li>number data types</li>
   <li>boolean data types</li>
 <li>UI/UX</li>
@@ -24,3 +18,9 @@
 <li>hide/show sprites</li>
 <li>clones</li>
 <li>wait during loop</li></ul>
+<h3>challenges</h3>
+<ul><li>create your own version of this game</li>
+<li>how can we add fun chaos to this game? controls? goals?</li>
+<li>can we change the assets of this game to make it something unique?</li></ul>
+<h3>software engineering concepts</h3>
+<ul>
