@@ -1,3 +1,2 @@
-<p>week 3: joust clone -- win states</p>
-<p>this class we take a look at a point system and physics style from a joust clone</p>
-<p>link to project: </p>
+<p>this week we take a look at a maze game and remix the game to understand some of the mechanics of colliders</p>
+<p>link to project: https://scratch.mit.edu/projects/972319007/</p>
