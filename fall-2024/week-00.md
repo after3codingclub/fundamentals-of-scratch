@@ -5,6 +5,5 @@
   all students w accounts will be added to the Scratch Fall 2024 classroom.<br>
 Students will be encouraged to make their own studios for the semester to showcase their work.</p>
 <h4>Scratch Goals</h4>
-<ul><li>make a scratch project w arrow keys moving the sprite</li><li>create a new sprite</li><li>import an image as a sprite</li><li>import a GIF as a sprite and animate</li></ul>
-<h4>Pico-8 Goals</h4>
-<ul><li>create a sprite</li><li>create a background</li><li>move sprite arrow keys</li><li>animate sprite</li></ul>
+<ul><li>make a scratch project w arrow keys moving the sprite</li><li>create a new sprite</li><li>import an image as a sprite</li><li>import a GIF as a sprite and animate</li><li>make a Scratch Studio</li></ul>
+
