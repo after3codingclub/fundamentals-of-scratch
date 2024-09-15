@@ -2,5 +2,5 @@
 <p>This lesson is an introduction to game mechanics within Scratch<p/>
 <p>Projects: <br>[link]</p>
 <h3>Scratch Goals</h3>
-<ul><li>creating scrolling scheme</li><li>building collider</li><li>creating win/lose state</li></ul>
+<ul><li>creating scrolling scheme</li><li>build and load assets from piskel https://www.piskelapp.com/p/create/sprite</li><li>building collider</li><li>creating win/lose state</li></ul>
 
