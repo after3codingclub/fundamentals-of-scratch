@@ -1,140 +1,126 @@
--- Pokemon Battle Game in PICO-8 with Music and SFX
+-- Pokemon Clone in Pico-8 with Enhanced Battle System
 
--- Constants
-MAX_ROUNDS = 10
+local player_x = 64
+local player_y = 64
 
--- Create Pokémon function
-function create_pokemon(name, attack, speed, health, defense)
-    return {
-        name = name,
-        attack_power = attack,
-        attack_speed = speed,
-        max_health = health,
-        health = health,
-        defense = defense,
-        attack_timer = 0 -- Timer for attack delay
-    }
-end
+local enemy = {} -- Single enemy
+local max_enemy_hp = 15
 
--- Variables for game state
-player = {pokemon = nil}
-opponent = {pokemon = nil}
-round = 1
-game_over = false
+local player_hp = 20
+local player_max_hp = 20
 
--- Define some Pokémon creatures
-pokemons = {
-    create_pokemon("Pikachu", 10, 1, 30, 5),
-    create_pokemon("Charmander", 12, 2, 25, 4),
-    create_pokemon("Bulbasaur", 8, 1.5, 40, 6)
-}
+local in_battle = false
+local player_turn = true
 
--- Function for Pokémon attacks
-function attack(attacker, defender)
-    if attacker.attack_timer <= 0 then
-        -- Calculate damage: attack power - defender defense
-        local damage = max(0, attacker.attack_power - defender.defense)
-        defender.health = max(0, defender.health - damage)
-        attacker.attack_timer = attacker.attack_speed -- reset attack timer
-        
-        -- Play attack sound
-        sfx(0) -- Play sound effect #0 for attack
-    end
-end
+local feedback_timer = 0
+local feedback_duration = 60 -- 60 frames = 1 second
 
--- Function to update battle each turn
-function update_battle()
-    -- Reduce attack timers
-    player.pokemon.attack_timer -= 1
-    opponent.pokemon.attack_timer -= 1
-    
-    -- Player attacks opponent
-    attack(player.pokemon, opponent.pokemon)
-
-    -- Opponent attacks player
-    attack(opponent.pokemon, player.pokemon)
-
-    -- Check if someone lost the round
-    if player.pokemon.health <= 0 or opponent.pokemon.health <= 0 then
-        end_round()
-    end
-end
-
--- Handle round end and start a new round
-function end_round()
-    if opponent.pokemon.health <= 0 then
-        -- Player wins, can choose to take the opponent's Pokémon
-        print("You won! Press Z to steal their Pokémon")
-        -- Play win sound
-        sfx(1) -- Play sound effect #1 for winning
-        if btnp(4) then -- Button Z pressed
-            player.pokemon = opponent.pokemon
-        end
-    else
-        print("You lost the round!")
-        -- Play lose sound
-        sfx(2) -- Play sound effect #2 for losing
-    end
-    start_new_round()
-end
-
--- Start a new round
-function start_new_round()
-    if round > MAX_ROUNDS then
-        game_over = true
-        return
-    end
-
-    -- Set new opponent Pokémon
-    opponent.pokemon = create_pokemon("Random Enemy", rnd(10) + 10, rnd(2) + 1, rnd(30) + 20, rnd(5) + 3)
-    
-    -- Reset health for player and opponent
-    player.pokemon.health = player.pokemon.max_health
-    opponent.pokemon.health = opponent.pokemon.max_health
-    
-    round += 1
-end
-
--- Initialize game state
 function _init()
-    player.pokemon = pokemons[1] -- Start with Pikachu
-    start_new_round()
-    
-    -- Play background music
-    music(0) -- Play music track #0 in a loop
+  -- Set up your initial game state here
+  resetGame()
 end
 
--- Update game loop
 function _update()
-    if game_over then
-        if btnp(4) then -- Press any key to restart
-            _init()
-        end
-        return
+  if feedback_timer > 0 then
+    feedback_timer -= 1
+  else
+    if not in_battle then
+      movePlayer()
+      checkEncounter()
+    else
+      if player_turn then
+        playerTurn()
+      else
+        enemyTurn()
+      end
     end
-
-    -- Update battle between rounds
-    update_battle()
+  end
 end
 
--- Draw game graphics
 function _draw()
-    cls()
-    
-    -- Draw player's Pokémon stats
-    print("Player: "..player.pokemon.name, 10, 10)
-    print("Health: "..player.pokemon.health, 10, 20)
-    
-    -- Draw opponent's Pokémon stats
-    print("Opponent: "..opponent.pokemon.name, 90, 10)
-    print("Health: "..opponent.pokemon.health, 90, 20)
+  cls()
 
-    -- Draw sprites for Pokémon (simple placeholder, customize sprite numbers)
-    spr(1, 10, 40) -- Player Pokémon sprite
-    spr(2, 90, 40) -- Opponent Pokémon sprite
-    
-    -- Game over screen
-    if game_over then
-        print("Game Over! Press any key to restart", 40, 80)
+  if not in_battle then
+    spr(1, player_x, player_y)
+    if enemy.hp > 0 then
+      spr(2, enemy.x, enemy.y) -- Display the enemy sprite for reference
     end
+  else
+    print("Player HP: " .. player_hp .. "/" .. player_max_hp, 10, 10, 7)
+    print("Enemy HP: " .. enemy.hp, 10, 20, 8)
+
+    if player_turn then
+      print("A: Attack", 10, 120, 7)
+    else
+      print("Enemy's Turn", 10, 120, 8)
+    end
+
+    -- Win/Lose outcomes
+    if player_hp <= 0 then
+      print("You lose!", 60, 60, 8)
+      feedback_timer = feedback_duration
+    elseif enemy.hp <= 0 then
+      print("You win!", 60, 60, 7)
+      feedback_timer = feedback_duration
+    end
+  end
+
+  -- Display feedback for a certain duration
+  if feedback_timer > 0 then
+    feedback_timer -= 1
+    if feedback_timer == 0 then
+      resetGame()
+    end
+  end
+end
+
+function movePlayer()
+  if btn(0) then player_x = player_x - 1 end -- Left
+  if btn(1) then player_x = player_x + 1 end -- Right
+  if btn(2) then player_y = player_y - 1 end -- Up
+  if btn(3) then player_y = player_y + 1 end -- Down
+end
+
+function checkEncounter()
+  -- Simple encounter logic, check if player is within a certain range of the enemy
+  local encounter_range = 8
+  if abs(player_x - enemy.x) < encounter_range and abs(player_y - enemy.y) < encounter_range and enemy.hp > 0 then
+    in_battle = true
+  end
+end
+
+function playerTurn()
+  -- Player's turn logic
+  if btn(4) then -- A button for "Attack"
+    local player_damage = flr(rnd(5)) + 1 -- Random damage between 1 and 5
+    enemy.hp = max(enemy.hp - player_damage, 0)
+    player_turn = false -- Switch to enemy's turn
+  end
+end
+
+function enemyTurn()
+  -- Enemy's turn logic
+  if player_hp > 0 then
+    local enemy_damage = flr(rnd(4)) + 1 -- Random damage between 1 and 4
+    player_hp = max(player_hp - enemy_damage, 0)
+  end
+
+  player_turn = true -- Switch back to player's turn
+end
+
+function resetGame()
+  -- Reset game state after win or lose
+  player_hp = player_max_hp
+  in_battle = false
+  player_turn = true
+  player_x = 64
+  player_y = 64
+
+  enemy = { -- Reset the enemy with random position and health
+    x = rnd(120),
+    y = rnd(100) + 20,
+    hp = max_enemy_hp
+  }
+
+  feedback_timer = 0
 end
