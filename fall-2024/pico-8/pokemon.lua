@@ -14,6 +14,7 @@ local player_turn = true
 
 local feedback_timer = 0
 local feedback_duration = 60 -- 60 frames = 1 second
+local battle_ended = false -- new flag to track if battle is over
 
 function _init()
   -- set up your initial game state here
@@ -23,6 +24,11 @@ end
 function _update()
   if feedback_timer > 0 then
     feedback_timer -= 1
+  elseif battle_ended then
+    -- check for any keypress to reset the game after battle ends
+    if btnp() then
+      resetgame()
+    end
   else
     if not in_battle then
       moveplayer()
@@ -57,11 +63,11 @@ function _draw()
 
     -- win/lose outcomes
     if player_hp <= 0 then
-      print("you lose!", 60, 60, 8)
-      feedback_timer = feedback_duration
+      print("you lose! press any key to return", 60, 60, 8)
+      battle_ended = true
     elseif enemy.hp <= 0 then
-      print("you win!", 60, 60, 7)
-      feedback_timer = feedback_duration
+      print("you win! press any key to return", 60, 60, 7)
+      battle_ended = true
     end
   end
 
@@ -123,4 +129,5 @@ function resetgame()
   }
 
   feedback_timer = 0
+  battle_ended = false -- reset the flag when the game is reset
 end
